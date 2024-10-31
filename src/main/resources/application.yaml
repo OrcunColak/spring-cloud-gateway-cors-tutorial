@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        # http://localhost:8080/api/test-endpoint
+        - id: test-endpoint
+          uri: http://localhost:8081 # Target service URI for this endpoint
+          predicates:
+            - Path=/api/test-endpoint
+      
+      globalcors:
+        cors-configurations:
+          '[/**]': # Matches all routes
+            allowedOrigins: "http://localhost:3000, https://example.com, https://another-domain.com"
+            allowedMethods: "GET, POST, PUT, DELETE"
+            allowedHeaders: "Content-Type, Authorization"
+            exposedHeaders: "Authorization, X-Trace-Id"
+            allowCredentials: true
+            maxAge: 3600
